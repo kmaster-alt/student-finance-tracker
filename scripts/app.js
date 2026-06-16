@@ -2,17 +2,21 @@ const form = document.getElementById("transaction-form");
 const recordsBody = document.getElementById("records-body");
 const message = document.getElementById("message");
 
-let transactions = [];
+// load from localStorage or start empty
+let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
+render();
+
+// submit form
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    let description = document.getElementById("description").value;
-    let amount = document.getElementById("amount").value;
-    let category = document.getElementById("category").value;
-    let date = document.getElementById("date").value;
+    const description = document.getElementById("description").value;
+    const amount = document.getElementById("amount").value;
+    const category = document.getElementById("category").value;
+    const date = document.getElementById("date").value;
 
-    // Regex validation
+    // regex rules
     const descriptionRegex = /^\S(?:.*\S)?$/;
     const amountRegex = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
     const categoryRegex = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
@@ -25,39 +29,42 @@ form.addEventListener("submit", function (e) {
         !dateRegex.test(date)
     ) {
         message.textContent = "Invalid input";
+        message.style.color = "red";
         return;
     }
 
-    const transaction = {
+    const newTransaction = {
+        id: Date.now(),
         description,
         amount,
         category,
         date
     };
 
-    transactions.push(transaction);
+    transactions.push(newTransaction);
 
-    displayTransactions();
-
-    message.textContent = "Transaction added successfully";
+    localStorage.setItem("transactions", JSON.stringify(transactions));
 
     form.reset();
+
+    message.textContent = "Transaction added successfully";
+    message.style.color = "green";
+
+    render();
 });
 
-function displayTransactions() {
-
+// render table
+function render() {
     recordsBody.innerHTML = "";
 
-    transactions.forEach(function (transaction) {
-
+    transactions.forEach(t => {
         recordsBody.innerHTML += `
-        <tr>
-            <td>${transaction.description}</td>
-            <td>${transaction.amount}</td>
-            <td>${transaction.category}</td>
-            <td>${transaction.date}</td>
-        </tr>
+            <tr>
+                <td>${t.description}</td>
+                <td>${t.amount}</td>
+                <td>${t.category}</td>
+                <td>${t.date}</td>
+            </tr>
         `;
     });
-
 }
