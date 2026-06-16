@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,29 +24,32 @@
 
     <section id="about">
         <h2>About</h2>
-        <p>This app helps students keep track of their expenses.</p>
+        <p>This app helps students track their expenses easily.</p>
     </section>
 
     <section id="dashboard">
         <h2>Dashboard</h2>
-        <p>Total transactions: 0</p>
-        <p>Total amount: $0.00</p>
+        <p>Total transactions: <span id="total-count">0</span></p>
+        <p>Total amount: <span id="total-amount">0.00</span></p>
     </section>
 
     <section id="records">
         <h2>Transactions</h2>
 
+        <input type="text" id="search" placeholder="Search transactions...">
+
         <table>
-            <tr>
-                <th>Description</th>
-                <th>Amount</th>
-                <th>Category</th>
-                <th>Date</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
 
-            <tbody id="records-body">
-            </tbody>
-
+            <tbody id="records-body"></tbody>
         </table>
     </section>
 
@@ -55,24 +58,22 @@
 
         <form id="transaction-form">
 
-            <label for="description">Description</label>
-            <input type="text" id="description" required>
+            <label>Description</label>
+            <input type="text" name="description" required>
 
-            <label for="amount">Amount</label>
-            <input type="text" id="amount" required>
+            <label>Amount</label>
+            <input type="number" name="amount" required>
 
-            <label for="category">Category</label>
-            <input type="text" id="category" required>
+            <label>Category</label>
+            <input type="text" name="category" required>
 
-            <label for="date">Date</label>
-            <input type="date" id="date" required>
+            <label>Date</label>
+            <input type="date" name="date" required>
 
             <button type="submit">Add Transaction</button>
-
         </form>
 
         <p id="message"></p>
-
     </section>
 
     <section id="settings">
