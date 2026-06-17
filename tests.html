@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Regex Tests</title>
+</head>
+<body>
+
+<h1>Regex Tests</h1>
+
+<script>
+    const descriptionRegex = /^\S(?:.*\S)?$/;
+    const amountRegex = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
+    const categoryRegex = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
+    const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+
+    // advanced regex: duplicate words
+    const duplicateWordRegex = /\b(\w+)\s+\1\b/i;
+
+    console.log(descriptionRegex.test("Lunch"));
+    console.log(amountRegex.test("12.50"));
+    console.log(categoryRegex.test("Food"));
+    console.log(dateRegex.test("2025-09-25"));
+
+    console.log(duplicateWordRegex.test("coffee coffee"));
+    console.log(duplicateWordRegex.test("bus pass"));
+</script>
+
+</body>
+</html>

@@ -15,12 +15,32 @@ render();
 function addTransaction(e) {
     e.preventDefault();
 
+    const description = form.description.value.trim();
+    const amount = form.amount.value;
+    const category = form.category.value.trim();
+    const date = form.date.value;
+
+    const descriptionRegex = /^\S(?:.*\S)?$/;
+    const amountRegex = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
+    const categoryRegex = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
+    const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+
+    if (
+        !descriptionRegex.test(description) ||
+        !amountRegex.test(amount) ||
+        !categoryRegex.test(category) ||
+        !dateRegex.test(date)
+    ) {
+        message.textContent = "Invalid input";
+        return;
+    }
+
     const transaction = {
         id: Date.now(),
-        description: form.description.value,
-        amount: form.amount.value,
-        category: form.category.value,
-        date: form.date.value
+        description,
+        amount,
+        category,
+        date
     };
 
     transactions.push(transaction);
@@ -42,6 +62,7 @@ function searchTransactions() {
 
     try {
         const regex = new RegExp(this.value, "i");
+
         filtered = transactions.filter(t =>
             regex.test(t.description) ||
             regex.test(t.category) ||
