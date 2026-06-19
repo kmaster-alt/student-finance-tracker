@@ -37,3 +37,6 @@ Open "tests.html" and check the browser console to see the regex tests.
 
 ## Live Demo
 https://kmaster-alt.github.io/student-finance-tracker/
+
+## Demo video
+https://youtu.be/aGp6nK1MBRE
