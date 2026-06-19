@@ -35,4 +35,5 @@ The app uses regex to validate:
 ## Testing
 Open "tests.html" and check the browser console to see the regex tests.
 
-
+## Live Demo
+https://kmaster-alt.github.io/student-finance-tracker/
